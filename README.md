@@ -6,7 +6,7 @@ This app fetches your old and new tweets, analyzes the shift in your personality
 ---
 
 ### 🖼️ Preview
-![App Screenshot](./assets/screenshot.png)
+![App Screenshot](./assets/Screenshot.png)
 
 
 ---
