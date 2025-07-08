@@ -82,64 +82,47 @@ router.get('/me', (req, res) => {
   );
 });
 
-// router.get('/tweets', (req, res) => {
-//   // const accessToken = req.session.accessToken;
-//   // const accessTokenSecret = req.session.accessTokenSecret;
-//   // const userId = req.session.userId;
 
-//   // if (!accessToken || !accessTokenSecret || !userId) {
-//   //   return res.status(401).json({ error: 'User not authenticated' });
-//   // }
+router.get('/run-nlp-analysis', (req, res) => { 
+  const accessToken = req.session.accessToken;
+  const accessTokenSecret = req.session.accessTokenSecret;
+  const userId = req.session.userId;
 
-//   // const url = `https://api.twitter.com/2/users/${userId}/tweets?max_results=100&tweet.fields=created_at,public_metrics`;
+  if (!accessToken || !accessTokenSecret || !userId) {
+    return res.status(401).json({ error: 'User not authenticated' });
+  }
 
-//   // oauth.get(
-//   //   url,
-//   //   accessToken,
-//   //   accessTokenSecret,
-//   //   (err, data) => {
-//   //     if (err) {
-//   //       console.error('Error fetching tweets:', err);
-//   //       return res.status(500).json({ error: 'Failed to fetch tweets' });
-//   //     }
+  const url = `https://api.twitter.com/2/users/${userId}/tweets?max_results=100&tweet.fields=created_at,public_metrics`;
 
-//   //     const tweets = JSON.parse(data).data || [];
+  oauth.get(
+    url,
+    accessToken,
+    accessTokenSecret,
+    (err, data) => {
+      if (err) {
+        console.error('Error fetching tweets:', err);
+        return res.status(500).json({ error: 'Failed to fetch tweets' });
+      }  
+          const tweets = JSON.parse(data).data || [];
 
-//   //     const originalTweets = tweets.filter(tweet => {
-//   //       const isRetweet = tweet.text.startsWith('RT');
-//   //       const isReply = tweet.in_reply_to_user_id !== undefined;
-//   //       return !isRetweet && !isReply;
-//   //     });
+      const originalTweets = tweets.filter(tweet => {
+        const isRetweet = tweet.text.startsWith('RT');
+        const isReply = tweet.in_reply_to_user_id !== undefined;
+        return !isRetweet && !isReply;
+      });
 
-//       // originalTweets.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+      originalTweets.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
 
-//       // const midpoint = Math.floor(originalTweets.length / 2);
-//       // const thenTweets = originalTweets.slice(0, midpoint);
-//       // const nowTweets = originalTweets.slice(midpoint);
-      
-//       const then = summarizeMetrics(thenDummyData);
-//       const now = summarizeMetrics(nowDummyData);
-   
-//       const diff = {
-//         likes: ((now.total.likes - then.total.likes) / (then.total.likes || 1)) * 100,
-//         replies: ((now.total.replies - then.total.replies) / (then.total.replies || 1)) * 100,
-//         retweets: ((now.total.retweets - then.total.retweets) / (then.total.retweets || 1)) * 100,
-//         impressions: ((now.total.impressions - then.total.impressions) / (then.total.impressions || 1)) * 100,
-//       };
+       const midpoint = Math.floor(originalTweets.length / 2);
+       const thenData = originalTweets.slice(0, midpoint);
+       const nowData = originalTweets.slice(midpoint);
 
-      
-//     } 
-//   // )};
-// ); 
+       const GEMINI_API_KEY = process.env.GEMINI_API_KEY || ""; 
 
-router.get('/run-nlp-analysis', (req, res) => { // Changed to POST to receive body data
-    // In a real application, you would fetch these from a secure environment variable
-    // For this example, we'll assume process.env.GEMINI_API_KEY is set in your Node.js environment.
-    const GEMINI_API_KEY = process.env.GEMINI_API_KEY || ""; // Ensure you have this env var set!
-
-
-    const then = summarizeMetrics(thenDummyData); // Using dummy data for metrics
-    const now = summarizeMetrics(nowDummyData);   // Using dummy data for metrics
+      const then = summarizeMetrics(thenData); 
+      const now = summarizeMetrics(nowData);   
+    // const then = summarizeMetrics(thenDummyData); Dummy data for testing
+    // const now = summarizeMetrics(nowDummyData);   
 
     const diff = {
         likes: ((now.total.likes - then.total.likes) / (then.total.likes || 1)) * 100,
@@ -176,24 +159,24 @@ router.get('/run-nlp-analysis', (req, res) => { // Changed to POST to receive bo
             const analysis = JSON.parse(result);
             res.json({
                 difference: diff,
-                keywords: analysis, // This will contain then_keywords, now_keywords, topics_info, ai_overall_summary, ai_topic_summary, ai_self_summary
+                keywords: analysis, 
             });
+            // console.log({keywords:analysis});
         } catch (parseError) {
             console.error('Error parsing Python script output:', parseError);
             console.error('Raw Python output:', result);
             return res.status(500).json({ error: `Failed to parse NLP analysis output. Raw output: ${result.substring(0, 200)}...`, parseError: parseError.message });
         }
     });
-
-    // Construct the payload for the Python script
     const pythonPayload = {
         then: thenTexts,
         now: nowTexts,
-        gemini_api_key: GEMINI_API_KEY // Pass the API key here!
+        gemini_api_key: GEMINI_API_KEY 
     };
 
     py.stdin.write(JSON.stringify(pythonPayload));
     py.stdin.end();
+  })
 });
 
 

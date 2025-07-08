@@ -73,7 +73,6 @@ def call_gemini_api(prompt_text, gemini_api_key, response_schema=None):
         return f"AI Summary Error: An internal error occurred. {e}"
 
 def summarize_tweets_with_gemini_genz(then_texts, now_texts, gemini_api_key):
-
     then_corpus = "\n".join(then_texts) if then_texts else "No 'then' tweets provided."
     now_corpus = "\n".join(now_texts) if now_texts else "No 'now' tweets provided."
 
@@ -86,9 +85,25 @@ Analyze the following two sets of tweets:
 --- NOW TWEETS ---
 {now_corpus}
 
-Provide a super concise summary (exactly 2 lines, GenZ style) comparing the vibe, main themes, or focus of the "THEN TWEETS" versus the "NOW TWEETS". Keep it short and punchy.
+Now return a concise summary as a single string, in exactly the following format:
+
+"THEN TWEETS": <your one-liner>
+"NOW TWEETS": <your one-liner>
+
+Use GenZ tone, no extra text, just this exact format in one string.
 """
-    return call_gemini_api(prompt_text, gemini_api_key)
+
+    response_schema = {
+        "type": "object",
+        "properties": {
+                    "THEN TWEETS": {"type": "string"},
+                    "NOW TWEETS": {"type": "string"}
+        },
+        "required": ["THEN TWEETS", "NOW TWEETS"]
+    }
+
+    return call_gemini_api(prompt_text, gemini_api_key, response_schema)
+
 
 def identify_and_summarize_topic(tweets_list, period_name, gemini_api_key):
     
