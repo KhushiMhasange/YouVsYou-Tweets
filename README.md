@@ -6,8 +6,8 @@ This app fetches your old and new tweets, analyzes the shift in your personality
 ---
 
 ### 🖼️ Preview
+![App Screenshot](frontend/src/assets/Screentshot.png)
 
-*(Add a screenshot or gif of your UI here)*
 
 ---
 
@@ -32,7 +32,7 @@ cd YouVsYou-Tweets
 
 #### 2. Install dependencies
 
-For both frontend and backend folders (if split):
+For both frontend and backend folders :
 
 ```bash
 npm install
