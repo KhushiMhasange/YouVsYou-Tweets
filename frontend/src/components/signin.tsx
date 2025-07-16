@@ -20,9 +20,9 @@ function signin() {
       autoplay
      />
     <h1 className='text-3xl md:text-5xl font-bold p-2 md:p-4 mt-64'>See how far your tweets have come.</h1>
-    <h2 className='text-xl md:text-3xl font-bold font-sans'>Sign up to know  <img src={pointer} alt="down pointer" className=' inline w-12 h-12 rotate-180 text-white' /></h2>
+    <h2 className='text-xl md:text-3xl font-bold'>Sign up to know  <img src={pointer} alt="down pointer" className=' inline w-12 h-12 rotate-180 text-white' /></h2>
     <button onClick={handleClick}
-     className="bg-white/10 backdrop-blur-md border border-white/40 p-2 px-4 mt-2 text-[#3e7dcb] rounded-xl shadow-2xl font-bold text-lg md:text-2xl font-sans transition duration-200 hover:bg-white/20">Let's go !</button>
+     className="bg-white/10 backdrop-blur-md border border-white/40 p-2 px-4 mt-2 text-[#3e7dcb] rounded-xl shadow-2xl font-bold text-lg md:text-2xl transition duration-200 hover:bg-white/20">Let's go !</button>
     </div>
     </>
   )

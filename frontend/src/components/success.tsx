@@ -146,7 +146,7 @@ function Success() {
         </div>
 
         <button
-          className="bg-black/10 backdrop-blur-md border border-white/20 p-2 px-4 mt-2 font-sas rounded-xl shadow-2xl font-bold text-lg transition duration-200 hover:bg-black/20"
+          className="bg-black/20 backdrop-blur-md border border-white/20 p-2 px-4 mt-2 font-sas rounded-xl shadow-2xl font-bold text-lg transition duration-200 hover:bg-black/20"
           onClick={handleGenerateComparison}
         >
           Generate Comparison
@@ -168,24 +168,26 @@ function Success() {
       )}
 
       <div className='flex flex-col md:flex-row justify-center gap-4 mt-10 px-4'>
-        <div className="w-full md:w-1/2 min-h-[250px] bg-black/10 backdrop-blur-md border border-white/20 p-6 text-[#3e7dcb] rounded-xl shadow-xl transition duration-200 hover:bg-black/20">
+        <div className="w-full md:w-1/2 min-h-[250px] bg-black/20 backdrop-blur-md border border-white/20 p-6 text-[#3e7dcb] rounded-xl shadow-xl transition duration-200 hover:bg-black/30">
           <h3 className="text-xl font-bold mb-4 text-white">Then 🕰️</h3>
-          <div className="flex flex-wrap gap-2 mb-4 font-sans">
+          <div className="flex flex-wrap gap-2 mb-4">
               {topicThen && (<span className="bg-white/50 text-[#3e7dcb] font-semibold border border-white/60 px-3 py-1 rounded-full text-sm hover:bg-white/30 transition hover:cursor-pointer"> 
               {topicThen}
               </span>)}
           </div>
-          <p className="text-base text-white text-justify mb-4 font-sans">{thenData}</p>
+          <p className="text-base text-white text-justify mb-4">{thenData}
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae doloribus dolor incidunt itaque libero eaque quos, earum esse. Porro ut, nisi sunt esse sequi ipsam recusandae inventore impedit ducimus ad?
+          </p>
           <div className="flex flex-wrap gap-2">
-          <span className="bg-white/50 text-[#3e7dcb]  font-sans px-3 py-1 rounded-full border border-white/60 text-sm hover:bg-white/30 transition font-semibold  hover:cursor-pointer">TL;DR</span>
+          <span className="bg-white/50 text-[#3e7dcb] px-3 py-1 rounded-full border border-white/60 text-sm hover:bg-white/30 transition font-semibold  hover:cursor-pointer">TL;DR</span>
           </div>
-          <p className="text-base text-white whitespace-pre-line text-justify py-2 font-sans">{gistThen}</p>
-          <div className="flex flex-wrap gap-2 mt-2 font-sans">
-          <span className="bg-white/50 text-[#3e7dcb] font-sans px-3 py-1 rounded-full border border-white/60 text-sm hover:bg-white/30 transition font-semibold  hover:cursor-pointer">Personality-traits</span>
+          <p className="text-base text-white whitespace-pre-line text-justify py-2">{gistThen}</p>
+          <div className="flex flex-wrap gap-2 mt-2 ">
+          <span className="bg-white/50 text-[#3e7dcb] px-3 py-1 rounded-full border border-white/60 text-sm hover:bg-white/30 transition font-semibold  hover:cursor-pointer">Personality-traits</span>
           {personalityThen.map((trait, index) => (
             <span
               key={index}
-              className="bg-white/10 text-white lowercase font-sans px-3 py-1 rounded-full text-sm font-medium border border-white/30 hover:bg-white/30 transition"
+              className="bg-white/10 text-white lowercase px-3 py-1 rounded-full text-sm font-medium border border-white/30 hover:bg-white/30 transition"
             >
               {trait}
             </span>
@@ -193,24 +195,24 @@ function Success() {
         </div>
         </div>
 
-        <div className="w-full md:w-1/2 min-h-[250px] bg-black/10 backdrop-blur-md border border-white/20 p-6 text-[#3e7dcb] rounded-xl shadow-xl transition duration-200 hover:bg-black/20">
+        <div className="w-full md:w-1/2 min-h-[250px] bg-black/20 backdrop-blur-md border border-white/20 p-6 text-[#3e7dcb] rounded-xl shadow-xl transition duration-200 hover:bg-black/30">
           <h3 className="text-xl font-bold mb-4 text-white">Now ⚡</h3>
-          <div className="flex flex-wrap gap-2 mb-4 font-sans">
+          <div className="flex flex-wrap gap-2 mb-4">
               {topicNow && (<span className="bg-white/50  text-[#3e7dcb] border border-white/60 px-3 py-1 rounded-full text-sm font-semibold hover:bg-white/30 transition hover:cursor-pointer">
               {topicNow}
               </span>)}
           </div>
-          <p className="text-base text-white text-justify mb-4 font-sans">{nowData}</p>
-          <div className="flex flex-wrap gap-2 mb-2 font-sans">
+          <p className="text-base text-white text-justify mb-4 ">{nowData}</p>
+          <div className="flex flex-wrap gap-2 mb-2 ">
           <span className="bg-white/50 text-[#3e7dcb] px-3 py-1 rounded-full border border-white/60 text-sm hover:bg-white/30 transition font-semibold hover:cursor-pointer">TL;DR</span>
           </div>
-          <p className="text-base text-white whitespace-pre-line text-justify font-sans">{gistNow}</p>
-          <div className="flex flex-wrap gap-2 mt-6 font-sans">
+          <p className="text-base text-white whitespace-pre-line text-justify">{gistNow}</p>
+          <div className="flex flex-wrap gap-2 mt-6 ">
           <span className="bg-white/50 text-[#3e7dcb] px-3 py-1 rounded-full border border-white/60 hover:cursor-pointer text-sm font-semibold  hover:bg-white/30 transition">Personality-traits</span>
           {personalityNow.map((trait, index) => (
             <span
               key={index}
-              className="bg-white/10 text-white lowercase px-3 py-1 font-sans rounded-full text-sm font-medium border border-white/30 hover:bg-white/30 transition"
+              className="bg-white/10 text-white lowercase px-3 py-1  rounded-full text-sm font-medium border border-white/30 hover:bg-white/30 transition"
             >
               {trait}
             </span>
@@ -221,7 +223,7 @@ function Success() {
       </div>
 
       {/* {gistNow && gistThen && (
-        <div className="w-full bg-white/10 backdrop-blur-md border border-white/30 p-6 text-[#3e7dcb] rounded-xl shadow-xl font-sans mt-6 hover:bg-white/20">
+        <div className="w-full bg-white/10 backdrop-blur-md border border-white/30 p-6 text-[#3e7dcb] rounded-xl shadow-xl  mt-6 hover:bg-white/20">
           <h3 className="text-xl font-bold mb-2">Then vs Now 📌</h3>
           
           
@@ -231,7 +233,7 @@ function Success() {
       {advice && (
         <div className="w-full bg-black/10 backdrop-blur-md border border-white/20 p-6 text-[#3e7dcb] rounded-xl shadow-xl mt-6 hover:bg-black/20">
           <h3 className="text-xl font-bold mb-2 text-white">Advice 💡</h3>
-          <p className="text-base text-white text-justify font-sans">{advice}</p>
+          <p className="text-base text-white text-justify">{advice}</p>
         </div>
       )}
       <footer className='p-10'>Created with 🤍 by @KhushiMhasange</footer>
